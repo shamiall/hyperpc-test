@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  # ########################################
+  # REDIS
+  # ########################################
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - '6379:6379'
+    
+  # ########################################
+  # SERVER
+  # ########################################
+  medusa-server:
+    build:
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    container_name: medusa-server
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@host.docker.internal:5432/hyperpcDB
+      REDIS_URL: redis://redis:6379
+      NODE_ENV: development
+    ports:
+      - 9000:9000
+    depends_on:
+      - redis
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/ping']
+      interval: 30s
+      timeout: 10s
+      retries: 3

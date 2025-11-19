@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+yarn.lock
+package-lock.json
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+logs/
+
+# Docker
+Dockerfile*
+docker-compose*.yaml
+docker-compose*.yml
+
+# Migration files
+migrations/
+
+# Config files
+.env*
+*.config.js
+*.config.ts
+
+# IDE
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# Other
+*.md
